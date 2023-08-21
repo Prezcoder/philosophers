@@ -6,11 +6,11 @@
 /*   By: fbouchar <fbouchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 09:09:13 by fbouchar          #+#    #+#             */
-/*   Updated: 2023/08/21 09:18:43 by fbouchar         ###   ########.fr       */
+/*   Updated: 2023/08/21 10:28:57 by fbouchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "../include/philo.h"
 
 int	main(int argc, char **argv)
 {

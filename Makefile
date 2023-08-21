@@ -6,19 +6,21 @@
 #    By: fbouchar <fbouchar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/04 10:27:08 by emlamoth          #+#    #+#              #
-#    Updated: 2023/08/21 09:12:08 by fbouchar         ###   ########.fr        #
+#    Updated: 2023/08/21 10:31:43 by fbouchar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS =	main.c					\
-	
+SRCS =	main.c\
+
+HDRS = ./include/philo.h
+
 SRCS_DIR = ./srcs/
 OBJS_DIR = ./srcs/objs_philo/
 OBJS = $(SRCS:$(SCRS_DIR)%.c=$(OBJS_DIR)%.o)
 
 NAME = philo
 
-CFLAGS = -Wall -Wextra -Werror -g -O0
+CFLAGS = -Wall -Wextra -Werror -pthread #-fsanitize=thread
 
 CC = gcc
 
@@ -31,8 +33,8 @@ all: $(NAME)
 $(OBJS_DIR)%.o:$(SRCS_DIR)%.c
 	@mkdir -p $(OBJS_DIR)
 	@$(CC) $(CFLAGS) -c -o $@ $<
-	
-$(NAME): $(OBJS)
+
+$(NAME): $(HDRS) $(OBJS)
 	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 	@echo "${GREEN}PHILO COMPILED${NC}"
 
@@ -40,7 +42,7 @@ leak: CFLAGS += -g
 leak: all
 	@reset
 	valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes --track-origins=yes ./philo
-		
+
 clean:
 	@rm -rf $(OBJS_DIR)
 	@echo "${RED}PHILO OBJECTS DELETED${NC}"
