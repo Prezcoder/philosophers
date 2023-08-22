@@ -6,11 +6,13 @@
 #    By: fbouchar <fbouchar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/04 10:27:08 by emlamoth          #+#    #+#              #
-#    Updated: 2023/08/21 10:31:43 by fbouchar         ###   ########.fr        #
+#    Updated: 2023/08/22 10:28:57 by fbouchar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS =	main.c\
+		init_data.c\
+		utils.c\
 
 HDRS = ./include/philo.h
 
