@@ -6,15 +6,36 @@
 /*   By: fbouchar <fbouchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 09:41:10 by fbouchar          #+#    #+#             */
-/*   Updated: 2023/08/22 11:10:22 by fbouchar         ###   ########.fr       */
+/*   Updated: 2023/08/23 12:33:07 by fbouchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
 
-int	mess_error(char *mess)
+void	mutex_print(t_philo *philo, char *message)
+{
+	time_t	time;
+	
+	time = whats_the_time() - philo->start_time;
+	pthread_mutex_lock(philo->print);
+	printf("%ld %d %s", time, philo->id, message);
+	pthread_mutex_unlock(philo->print);
+	
+}
+
+time_t	whats_the_time()
+{
+	struct timeval current_time;
+	
+	gettimeofday(&current_time, NULL);
+	return ((current_time.tv_sec * 1000) + (current_time.tv_usec / 1000));
+}
+
+int	mess_error(char *mess, int flag)
 {
 	printf("%s\n", mess);
+	if (flag == 1)
+		exit (1);
 	return (-1);
 }
 
