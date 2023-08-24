@@ -6,7 +6,7 @@
 /*   By: fbouchar <fbouchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 09:15:23 by fbouchar          #+#    #+#             */
-/*   Updated: 2023/08/24 10:07:00 by fbouchar         ###   ########.fr       */
+/*   Updated: 2023/08/24 13:00:21 by fbouchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ between 60 and 1000000 ms and between 1 and 10000 times."
 # define THINK "is thinking\n"
 # define DEAD "died\n"
 
-typedef struct	s_philo
+typedef struct s_philo
 {
 	int				id;
 	int				nb_philo;
@@ -51,7 +51,7 @@ typedef struct	s_philo
 	pthread_mutex_t	*meal;
 }				t_philo;
 
-typedef struct	s_data
+typedef struct s_data
 {
 	int				nb_philo;
 	time_t			ttd;
@@ -66,19 +66,21 @@ typedef struct	s_data
 	t_philo			philo[200];
 }				t_data;
 
-
 int		main(int argc, char **argv);
 int		mess_error(char *mess, int flag);
 int		all_digits(char **argv);
-void	init_data(t_data *data, char **argv);
+void	welcoming_the_guests(t_data *data, char **argv);
 int		ft_atoi(const char *str);
-void	init_philo(t_data *data);
-time_t	whats_the_time();
+void	sitting_the_philosophers(t_data *data);
+void	enjoying_the_meal(t_data *data);
+time_t	whats_the_time(void);
 void	*routine(void *philoptr);
 void	*mutex_print(t_philo *philo, char *message);
 void	wait_a_while(int duration);
 void	*philos_are_eating(t_philo *philo);
-void	*looking_for_death(t_data *data);
+void	*whose_starving(t_data *data);
 bool	mutex_dead(t_philo *philo);
+void	enjoying_each_other(t_data *data);
+void	cleaning_the_table(t_data *data);
 
 #endif

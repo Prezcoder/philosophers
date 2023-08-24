@@ -6,7 +6,7 @@
 /*   By: fbouchar <fbouchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 09:30:19 by fbouchar          #+#    #+#             */
-/*   Updated: 2023/08/24 10:57:33 by fbouchar         ###   ########.fr       */
+/*   Updated: 2023/08/24 13:00:51 by fbouchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ void	check_time_to(time_t *time_to, char *argv)
 		*time_to = -1;
 }
 
-void	init_data(t_data *data, char **argv)
+void	welcoming_the_guests(t_data *data, char **argv)
 {
 	data->times_philo = -2;
-	if (ft_atoi(argv[1]) >= 0 &&  ft_atoi(argv[1]) <= 200)
+	if (ft_atoi(argv[1]) >= 0 && ft_atoi(argv[1]) <= 200)
 		data->nb_philo = ft_atoi(argv[1]);
 	else
 		data->nb_philo = -1;
@@ -32,7 +32,7 @@ void	init_data(t_data *data, char **argv)
 	check_time_to(&data->tts, argv[4]);
 	if (argv[5])
 	{
-		if (ft_atoi(argv[5]) >= 0 &&  ft_atoi(argv[5]) <= 10000)
+		if (ft_atoi(argv[5]) >= 0 && ft_atoi(argv[5]) <= 10000)
 			data->times_philo = ft_atoi(argv[5]);
 		else
 			data->times_philo = -1;
@@ -45,7 +45,7 @@ void	init_data(t_data *data, char **argv)
 	data->dead = false;
 }
 
-void	init_philo(t_data *data)
+void	sitting_the_philosophers(t_data *data)
 {
 	int	i;
 

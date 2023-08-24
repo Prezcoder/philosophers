@@ -6,7 +6,7 @@
 #    By: fbouchar <fbouchar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/04 10:27:08 by emlamoth          #+#    #+#              #
-#    Updated: 2023/08/24 11:00:21 by fbouchar         ###   ########.fr        #
+#    Updated: 2023/08/24 12:47:17 by fbouchar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,6 @@ SRCS =	main.c		\
 		init_data.c	\
 		utils.c		\
 		utils2.c	\
-		watching.c	\
 
 HDRS = ./include/philo.h
 

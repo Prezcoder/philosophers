@@ -6,11 +6,28 @@
 /*   By: fbouchar <fbouchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 09:09:13 by fbouchar          #+#    #+#             */
-/*   Updated: 2023/08/24 10:56:34 by fbouchar         ###   ########.fr       */
+/*   Updated: 2023/08/24 13:01:03 by fbouchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
+
+int	main(int argc, char **argv)
+{
+	t_data	data;
+
+	if (argc < 5 || argc > 6)
+		return (mess_error(PARAMERROR, 0));
+	if (all_digits(argv))
+		return (mess_error(WRONGTYPE, 0));
+	welcoming_the_guests(&data, argv);
+	sitting_the_philosophers(&data);
+	enjoying_the_meal(&data);
+	whose_starving(&data);
+	enjoying_each_other(&data);
+	cleaning_the_table(&data);
+	return (0);
+}
 
 void	*philos_are_eating(t_philo *philo)
 {
@@ -60,32 +77,28 @@ void	*routine(void *philoptr)
 	return (NULL);
 }
 
-int	main(int argc, char **argv)
+void	enjoying_the_meal(t_data *data)
 {
-	t_data	data;
 	int	i;
 
 	i = 0;
-	if (argc < 5 || argc > 6)
-		return (mess_error(PARAMERROR, 0));
-	if (all_digits(argv))
-		return (mess_error(WRONGTYPE, 0));
-	init_data(&data, argv);
-	init_philo(&data);
-	while (i < data.nb_philo)
+	while (i < data->nb_philo)
 	{
-		data.philo[i].last_meal = data.start_time;
-		data.philo[i].start_time = data.start_time;
-		pthread_create(&data.thread[i], NULL, &routine, &data.philo[i]);
+		data->philo[i].last_meal = data->start_time;
+		data->philo[i].start_time = data->start_time;
+		pthread_create(&data->thread[i], NULL, &routine, &data->philo[i]);
 		i++;
 	}
-	looking_for_death(&data);
+}
+
+void	enjoying_each_other(t_data *data)
+{
+	int	i;
+
 	i = 0;
-	while (i < data.nb_philo && mutex_dead(&data.philo[i]) == false)
+	while (i < data->nb_philo && mutex_dead(&data->philo[i]) == false)
 	{
-		pthread_join(data.thread[i], NULL);
+		pthread_join(data->thread[i], NULL);
 		i++;
 	}
-	
-	return (0);
 }

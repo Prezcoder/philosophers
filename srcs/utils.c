@@ -6,7 +6,7 @@
 /*   By: fbouchar <fbouchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 09:41:10 by fbouchar          #+#    #+#             */
-/*   Updated: 2023/08/24 10:43:30 by fbouchar         ###   ########.fr       */
+/*   Updated: 2023/08/24 13:01:48 by fbouchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	*mutex_print(t_philo *philo, char *message)
 {
 	time_t	time;
-	
+
 	if (*philo->dead == true)
 		return (NULL);
 	if (*philo->dead == false)
@@ -29,10 +29,10 @@ void	*mutex_print(t_philo *philo, char *message)
 	return (NULL);
 }
 
-time_t	whats_the_time()
+time_t	whats_the_time(void)
 {
-	struct timeval current_time;
-	
+	struct timeval	current_time;
+
 	gettimeofday(&current_time, NULL);
 	return ((current_time.tv_sec * 1000) + (current_time.tv_usec / 1000));
 }
@@ -49,12 +49,12 @@ int	all_digits(char **argv)
 {
 	int	i;
 	int	j;
-	
+
 	j = 1;
 	while (argv[j])
 	{
 		i = 0;
-		while(argv[j][i])
+		while (argv[j][i])
 		{
 			if (argv[j][i] < '0' || argv[j][i] > '9')
 				return (1);
