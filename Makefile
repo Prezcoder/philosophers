@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: fbouchar <fbouchar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/04/04 10:27:08 by emlamoth          #+#    #+#              #
-#    Updated: 2023/08/24 12:47:17 by fbouchar         ###   ########.fr        #
+#    Created: 2023/08/21 09:09:13 by fbouchar          #+#    #+#              #
+#    Updated: 2023/08/24 13:09:41 by fbouchar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,11 +40,6 @@ $(OBJS_DIR)%.o:$(SRCS_DIR)%.c
 $(NAME): $(HDRS) $(OBJS)
 	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 	@echo "${GREEN}PHILO COMPILED${NC}"
-
-leak: CFLAGS += -g
-leak: all
-	@reset
-	valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes --track-origins=yes ./philo
 
 clean:
 	@rm -rf $(OBJS_DIR)
