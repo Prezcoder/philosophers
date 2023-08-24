@@ -6,7 +6,7 @@
 /*   By: fbouchar <fbouchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 09:15:23 by fbouchar          #+#    #+#             */
-/*   Updated: 2023/08/23 11:44:54 by fbouchar         ###   ########.fr       */
+/*   Updated: 2023/08/24 10:07:00 by fbouchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,7 @@
 # define WRONGNBR "Parameters must be between 1 and 200 philosophers, \
 between 60 and 1000000 ms and between 1 and 10000 times."
 
-# define FORKL "has taken a fork left\n"
-# define FORKR "has taken a fork right\n"
+# define FORK "has taken a fork\n"
 # define EAT "is eating\n"
 # define SLEEP "is sleeping\n"
 # define THINK "is thinking\n"
@@ -76,7 +75,10 @@ int		ft_atoi(const char *str);
 void	init_philo(t_data *data);
 time_t	whats_the_time();
 void	*routine(void *philoptr);
-void	mutex_print(t_philo *philo, char *message);
+void	*mutex_print(t_philo *philo, char *message);
 void	wait_a_while(int duration);
+void	*philos_are_eating(t_philo *philo);
+void	*looking_for_death(t_data *data);
+bool	mutex_dead(t_philo *philo);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: fbouchar <fbouchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 09:30:19 by fbouchar          #+#    #+#             */
-/*   Updated: 2023/08/23 12:33:30 by fbouchar         ###   ########.fr       */
+/*   Updated: 2023/08/24 10:57:33 by fbouchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	init_data(t_data *data, char **argv)
 		mess_error(WRONGNBR, 1);
 	pthread_mutex_init(&data->print, NULL);
 	pthread_mutex_init(&data->meal, NULL);
+	data->dead = false;
 }
 
 void	init_philo(t_data *data)
@@ -49,7 +50,6 @@ void	init_philo(t_data *data)
 	int	i;
 
 	i = 0;
-	data->start_time = whats_the_time();
 	while (i < data->nb_philo)
 	{
 		data->philo[i].id = i + 1;
@@ -61,7 +61,6 @@ void	init_philo(t_data *data)
 		data->philo[i].print = &data->print;
 		data->philo[i].meal = &data->meal;
 		data->philo[i].dead = &data->dead;
-		data->philo[i].start_time = data->start_time;
 		pthread_mutex_init(&data->philo[i].leftfork, NULL);
 		if (i == data->nb_philo - 1)
 			data->philo[0].rightfork = &data->philo[i].leftfork;
@@ -69,4 +68,5 @@ void	init_philo(t_data *data)
 			data->philo[i + 1].rightfork = &data->philo[i].leftfork;
 		i++;
 	}
+	data->start_time = whats_the_time();
 }
