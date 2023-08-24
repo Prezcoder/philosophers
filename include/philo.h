@@ -6,7 +6,7 @@
 /*   By: fbouchar <fbouchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 09:15:23 by fbouchar          #+#    #+#             */
-/*   Updated: 2023/08/24 13:00:21 by fbouchar         ###   ########.fr       */
+/*   Updated: 2023/08/24 13:06:31 by fbouchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ typedef struct s_data
 	t_philo			philo[200];
 }				t_data;
 
-int		main(int argc, char **argv);
 int		mess_error(char *mess, int flag);
 int		all_digits(char **argv);
 void	welcoming_the_guests(t_data *data, char **argv);

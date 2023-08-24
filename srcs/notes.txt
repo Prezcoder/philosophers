@@ -1,9 +1,0 @@
-
-Avoir le bon nombre d'arguments. x
-Vérifier que c'est des chiffres. x
-
-number_of_philosophers : 1 à 200 x
-time_to_die : 600 à 1000000 x
-time_to_eat : 600 à 1000000 x
-time_to_sleep : 600 à 1000000 x
-number_of_times_each_philosopher_must_eat : 1 à 10000 x
