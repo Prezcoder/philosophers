@@ -6,7 +6,7 @@
 /*   By: fbouchar <fbouchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 09:09:13 by fbouchar          #+#    #+#             */
-/*   Updated: 2023/08/24 13:01:03 by fbouchar         ###   ########.fr       */
+/*   Updated: 2023/08/24 15:13:03 by fbouchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,26 +31,18 @@ int	main(int argc, char **argv)
 
 void	*philos_are_eating(t_philo *philo)
 {
-	if (mutex_dead(philo) == false)
-	{
-		pthread_mutex_lock(&philo->leftfork);
-		pthread_mutex_lock(philo->rightfork);
-		mutex_print(philo, FORK);
-		mutex_print(philo, FORK);
-		mutex_print(philo, EAT);
-		if (mutex_dead(philo) == true)
-			return (NULL);
-		else
-		{
-			pthread_mutex_lock(philo->meal);
-			philo->last_meal = whats_the_time();
-			pthread_mutex_unlock(philo->meal);
-			wait_a_while(philo->tte);
-			mutex_print(philo, SLEEP);
-		}
-		pthread_mutex_unlock(&philo->leftfork);
-		pthread_mutex_unlock(philo->rightfork);
-	}
+	pthread_mutex_lock(&philo->leftfork);
+	pthread_mutex_lock(philo->rightfork);
+	mutex_print(philo, FORK);
+	mutex_print(philo, FORK);
+	mutex_print(philo, EAT);
+	pthread_mutex_lock(philo->meal);
+	philo->last_meal = whats_the_time();
+	pthread_mutex_unlock(philo->meal);
+	wait_a_while(philo->tte);
+	mutex_print(philo, SLEEP);
+	pthread_mutex_unlock(&philo->leftfork);
+	pthread_mutex_unlock(philo->rightfork);
 	return (NULL);
 }
 
@@ -69,9 +61,11 @@ void	*routine(void *philoptr)
 		philos_are_eating(philo);
 		wait_a_while(philo->tts);
 		mutex_print(philo, THINK);
+		pthread_mutex_lock(philo->meal);
 		if (philo->times-- == 1)
 			philo->id = 0;
-		if (philo->id == 0 || mutex_dead(philo) == true)
+		pthread_mutex_unlock(philo->meal);
+		if (mutex_dead(philo) == true || philo->id == 0)
 			return (NULL);
 	}
 	return (NULL);

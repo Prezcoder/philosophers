@@ -6,7 +6,7 @@
 /*   By: fbouchar <fbouchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 09:15:23 by fbouchar          #+#    #+#             */
-/*   Updated: 2023/08/24 13:06:31 by fbouchar         ###   ########.fr       */
+/*   Updated: 2023/08/24 15:18:07 by fbouchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef struct s_philo
 	pthread_mutex_t	*rightfork;
 	pthread_mutex_t	*print;
 	pthread_mutex_t	*meal;
+	pthread_mutex_t	*death;
 }				t_philo;
 
 typedef struct s_data
@@ -62,6 +63,7 @@ typedef struct s_data
 	time_t			start_time;
 	pthread_mutex_t	print;
 	pthread_mutex_t	meal;
+	pthread_mutex_t	death;
 	pthread_t		thread[200];
 	t_philo			philo[200];
 }				t_data;
