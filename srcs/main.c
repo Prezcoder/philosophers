@@ -6,7 +6,7 @@
 /*   By: fbouchar <fbouchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 09:09:13 by fbouchar          #+#    #+#             */
-/*   Updated: 2023/08/24 15:13:03 by fbouchar         ###   ########.fr       */
+/*   Updated: 2023/08/28 10:57:43 by fbouchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ int	main(int argc, char **argv)
 void	*philos_are_eating(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->leftfork);
-	pthread_mutex_lock(philo->rightfork);
 	mutex_print(philo, FORK);
+	pthread_mutex_lock(philo->rightfork);
 	mutex_print(philo, FORK);
 	mutex_print(philo, EAT);
 	pthread_mutex_lock(philo->meal);
@@ -49,7 +49,7 @@ void	*philos_are_eating(t_philo *philo)
 void	*routine(void *philoptr)
 {
 	t_philo	*philo;
-
+	
 	philo = (t_philo *)philoptr;
 	if (philo->id % 2 == 1)
 	{
@@ -59,12 +59,14 @@ void	*routine(void *philoptr)
 	while (1)
 	{
 		philos_are_eating(philo);
-		wait_a_while(philo->tts);
-		mutex_print(philo, THINK);
 		pthread_mutex_lock(philo->meal);
 		if (philo->times-- == 1)
 			philo->id = 0;
 		pthread_mutex_unlock(philo->meal);
+		if (mutex_dead(philo) == true || philo->id == 0)
+			return (NULL);
+		wait_a_while(philo->tts);
+		mutex_print(philo, THINK);
 		if (mutex_dead(philo) == true || philo->id == 0)
 			return (NULL);
 	}

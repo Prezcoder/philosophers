@@ -6,7 +6,7 @@
 /*   By: fbouchar <fbouchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:29:14 by fbouchar          #+#    #+#             */
-/*   Updated: 2023/08/24 15:32:42 by fbouchar         ###   ########.fr       */
+/*   Updated: 2023/08/28 10:57:01 by fbouchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	cleaning_the_table(t_data *data)
 	}
 	pthread_mutex_destroy(&data->meal);
 	pthread_mutex_destroy(&data->print);
+	pthread_mutex_destroy(&data->death);
 }
 
 void	*whose_starving(t_data *data)
@@ -37,18 +38,15 @@ void	*whose_starving(t_data *data)
 		while (i < data->nb_philo)
 		{
 			pthread_mutex_lock(&data->meal);
-			// if (data->philo[i].id == 0)
-			// 	return (NULL);
 			if (data->philo[i].last_meal != 0 && whats_the_time()
 				- data->philo[i].last_meal >= data->philo[i].ttd)
 			{
 				time = whats_the_time() - data->start_time;
 				pthread_mutex_lock(&data->print);
-				printf("%ld %d %s", time, data->philo[i].id, DEAD);
-				// pthread_mutex_unlock(&data->print);
 				pthread_mutex_lock(&data->death);
+				if (data->philo[i].id)
+					printf("%ld %d %s", time, data->philo[i].id, DEAD);
 				data->dead = true;
-				// data->philo[i].id = 0;
 				pthread_mutex_unlock(&data->death);
 				pthread_mutex_unlock(&data->meal);
 				return (NULL);
