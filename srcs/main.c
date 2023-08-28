@@ -6,7 +6,7 @@
 /*   By: fbouchar <fbouchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 09:09:13 by fbouchar          #+#    #+#             */
-/*   Updated: 2023/08/28 12:55:46 by fbouchar         ###   ########.fr       */
+/*   Updated: 2023/08/28 13:23:24 by fbouchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	main(int argc, char **argv)
 	if (data.nb_philo == 1)
 	{
 		printf("0 1 %s", FORK);
+		wait_a_while(data.ttd);
 		printf("%ld 1 %s", data.ttd, DEAD);
 		return (-1);
 	}
