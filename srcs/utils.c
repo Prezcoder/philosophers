@@ -6,7 +6,7 @@
 /*   By: fbouchar <fbouchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 09:41:10 by fbouchar          #+#    #+#             */
-/*   Updated: 2023/08/28 10:56:06 by fbouchar         ###   ########.fr       */
+/*   Updated: 2023/08/28 11:49:56 by fbouchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	mess_error(char *mess, int flag)
 {
 	printf("%s\n", mess);
 	if (flag == 1)
-		exit (1);
+		return (1);
 	return (-1);
 }
 

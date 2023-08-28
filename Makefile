@@ -6,7 +6,7 @@
 #    By: fbouchar <fbouchar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/21 09:09:13 by fbouchar          #+#    #+#              #
-#    Updated: 2023/08/24 15:33:34 by fbouchar         ###   ########.fr        #
+#    Updated: 2023/08/28 13:15:40 by fbouchar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ OBJS = $(SRCS:$(SCRS_DIR)%.c=$(OBJS_DIR)%.o)
 
 NAME = philo
 
-CFLAGS = -Wall -Wextra -Werror -pthread -fsanitize=thread
+CFLAGS = -Wall -Wextra -Werror #-pthread -fsanitize=thread -g
 
 CC = gcc
 

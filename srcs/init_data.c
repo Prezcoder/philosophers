@@ -6,7 +6,7 @@
 /*   By: fbouchar <fbouchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 09:30:19 by fbouchar          #+#    #+#             */
-/*   Updated: 2023/08/28 10:20:33 by fbouchar         ###   ########.fr       */
+/*   Updated: 2023/08/28 13:02:35 by fbouchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	check_time_to(time_t *time_to, char *argv)
 		*time_to = -1;
 }
 
-void	welcoming_the_guests(t_data *data, char **argv)
+t_data	*welcoming_the_guests(t_data *data, char **argv)
 {
 	data->times_philo = -2;
 	if (ft_atoi(argv[1]) >= 1 && ft_atoi(argv[1]) <= 200)
@@ -39,11 +39,20 @@ void	welcoming_the_guests(t_data *data, char **argv)
 	}
 	if (data->ttd == -1 || data->tte == -1 || data->tts == -1
 		|| data->times_philo == -1 || data->nb_philo == -1)
+	{
 		mess_error(WRONGNBR, 1);
+		return (NULL);
+	}
+	mutex_init(data);
+	data->dead = false;
+	return (data);
+}
+
+void	mutex_init(t_data *data)
+{
 	pthread_mutex_init(&data->print, NULL);
 	pthread_mutex_init(&data->meal, NULL);
 	pthread_mutex_init(&data->death, NULL);
-	data->dead = false;
 }
 
 void	sitting_the_philosophers(t_data *data)

@@ -6,7 +6,7 @@
 /*   By: fbouchar <fbouchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 09:09:13 by fbouchar          #+#    #+#             */
-/*   Updated: 2023/08/28 10:57:43 by fbouchar         ###   ########.fr       */
+/*   Updated: 2023/08/28 12:55:46 by fbouchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,25 @@
 
 int	main(int argc, char **argv)
 {
-	t_data	data;
+	t_data		data;
+	pthread_t	thread[200];
 
 	if (argc < 5 || argc > 6)
 		return (mess_error(PARAMERROR, 0));
 	if (all_digits(argv))
 		return (mess_error(WRONGTYPE, 0));
-	welcoming_the_guests(&data, argv);
+	if (!welcoming_the_guests(&data, argv))
+		return (-1);
+	if (data.nb_philo == 1)
+	{
+		printf("0 1 %s", FORK);
+		printf("%ld 1 %s", data.ttd, DEAD);
+		return (-1);
+	}
 	sitting_the_philosophers(&data);
-	enjoying_the_meal(&data);
+	enjoying_the_meal(&data, thread);
 	whose_starving(&data);
-	enjoying_each_other(&data);
+	enjoying_each_other(&data, thread);
 	cleaning_the_table(&data);
 	return (0);
 }
@@ -49,7 +57,7 @@ void	*philos_are_eating(t_philo *philo)
 void	*routine(void *philoptr)
 {
 	t_philo	*philo;
-	
+
 	philo = (t_philo *)philoptr;
 	if (philo->id % 2 == 1)
 	{
@@ -73,28 +81,28 @@ void	*routine(void *philoptr)
 	return (NULL);
 }
 
-void	enjoying_the_meal(t_data *data)
+void	enjoying_the_meal(t_data *data, pthread_t *thread)
 {
-	int	i;
+	int			i;
 
 	i = 0;
 	while (i < data->nb_philo)
 	{
 		data->philo[i].last_meal = data->start_time;
 		data->philo[i].start_time = data->start_time;
-		pthread_create(&data->thread[i], NULL, &routine, &data->philo[i]);
+		pthread_create(&thread[i], NULL, &routine, &data->philo[i]);
 		i++;
 	}
 }
 
-void	enjoying_each_other(t_data *data)
+void	enjoying_each_other(t_data *data, pthread_t *thread)
 {
 	int	i;
 
 	i = 0;
-	while (i < data->nb_philo && mutex_dead(&data->philo[i]) == false)
+	while (i < data->nb_philo)
 	{
-		pthread_join(data->thread[i], NULL);
+		pthread_join(thread[i], NULL);
 		i++;
 	}
 }
