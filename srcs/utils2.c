@@ -6,7 +6,7 @@
 /*   By: fbouchar <fbouchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:29:14 by fbouchar          #+#    #+#             */
-/*   Updated: 2023/08/28 12:01:01 by fbouchar         ###   ########.fr       */
+/*   Updated: 2023/08/29 13:13:41 by fbouchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ void	*whose_starving(t_data *data)
 
 void	philo_dead(t_data *data, time_t time, int i)
 {
-	pthread_mutex_lock(&data->death);
 	pthread_mutex_lock(&data->print);
+	pthread_mutex_lock(&data->death);
 	if (data->philo[i].id)
 		printf("%ld %d %s", time, data->philo[i].id, DEAD);
 	pthread_mutex_unlock(&data->print);

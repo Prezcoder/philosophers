@@ -6,7 +6,7 @@
 /*   By: fbouchar <fbouchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 09:41:10 by fbouchar          #+#    #+#             */
-/*   Updated: 2023/08/28 11:49:56 by fbouchar         ###   ########.fr       */
+/*   Updated: 2023/08/29 13:14:30 by fbouchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,12 @@ void	*mutex_print(t_philo *philo, char *message)
 {
 	time_t	time;
 
-	time = whats_the_time() - philo->start_time;
 	pthread_mutex_lock(philo->print);
 	if (mutex_dead(philo) == false)
+	{
+		time = whats_the_time() - philo->start_time;
 		printf("%ld %d %s", time, philo->id, message);
+	}
 	pthread_mutex_unlock(philo->print);
 	return (NULL);
 }
